@@ -121,7 +121,17 @@ El servidor mostrará la dirección que deben abrir los demás.
 
 El juego necesita un alojamiento que **ejecute Node y admita WebSockets**; un alojamiento solo de archivos no sirve, porque las salas las lleva el servidor.
 
-El repositorio incluye `render.yaml`, listo para [Render](https://render.com): se crea un *Blueprint* a partir de este repositorio y Render instala, arranca y da una dirección `https`. En un alojamiento el servidor acepta conexiones de fuera automáticamente.
+El repositorio viene preparado de dos formas:
+
+- **`Dockerfile`**, para cualquier alojamiento de contenedores, como [Back4app Containers](https://www.back4app.com/container-as-a-service-caas): se conecta el repositorio y el servicio construye y arranca la imagen. El servidor escucha en el puerto 8080 y gasta muy poca memoria (unos 16 MB en reposo).
+- **`render.yaml`**, para [Render](https://render.com), creando un *Blueprint* a partir del repositorio.
+
+En ambos casos el servidor acepta conexiones de fuera automáticamente y el alojamiento da una dirección `https`.
+
+```bash
+docker build -t nightfall .
+docker run -p 8080:8080 nightfall
+```
 
 A tener en cuenta:
 

@@ -1,0 +1,7 @@
+node_modules
+.git
+docs
+tools
+*.md
+start.bat
+render.yaml
