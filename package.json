@@ -2,6 +2,8 @@
   "name": "nightfall-fps-demo",
   "version": "1.0.0",
   "description": "Demo FPS cinematográfica para navegador (Three.js / WebGL)",
+  "license": "MIT",
+  "author": "Alexus",
   "private": true,
   "engines": {
     "node": ">=20"

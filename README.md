@@ -173,3 +173,11 @@ Funciona y está comprobado con pruebas automáticas, pero conviene saber dónde
 - La primera vez que se carga un mapa hay una pausa de unos segundos.
 - Los valores de daño, tiempos y el diseño de los mapas nuevos son un punto de partida, pendiente de ajustar jugando.
 - Pide una tarjeta gráfica decente; la calidad se ajusta sola si el equipo no llega.
+
+---
+
+## Licencia
+
+[MIT](LICENSE) © 2026 Alexus.
+
+Puedes usar, copiar, modificar y distribuir este proyecto, también con fines comerciales, siempre que conserves el aviso de autoría y la licencia. Se ofrece tal cual, sin garantías.
