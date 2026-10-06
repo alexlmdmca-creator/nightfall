@@ -11,7 +11,8 @@ const { attachRooms } = require('./rooms.js');
 const ROOT = __dirname;
 const args = process.argv.slice(2);
 const PORT = Number(args.find((a) => /^\d+$/.test(a)) || process.env.PORT || 5173);
-const HOST = process.env.HOST || (args.includes('--lan') || process.env.PORT ? '0.0.0.0' : '127.0.0.1');
+// Algunos alojamientos (alwaysdata) indican también la dirección en la que escuchar, en la variable IP.
+const HOST = process.env.HOST || process.env.IP || (args.includes('--lan') || process.env.PORT ? '0.0.0.0' : '127.0.0.1');
 // Solo se sirve lo que necesita el navegador.
 const PUBLIC = ['/index.html', '/css/', '/src/', '/node_modules/three/'];
 
