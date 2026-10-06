@@ -1,0 +1,22 @@
+{
+  "name": "nightfall-fps-demo",
+  "version": "1.0.0",
+  "description": "Demo FPS cinematográfica para navegador (Three.js / WebGL)",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "lan": "node server.js --lan",
+    "shot": "node tools/shot.mjs",
+    "test:online": "node tools/mptest.mjs"
+  },
+  "dependencies": {
+    "three": "^0.186.1",
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}

@@ -1,0 +1,10 @@
+# Despliegue en Render (https://render.com): un único servicio web con Node.
+# Sirve el juego y lleva las salas en memoria, así que debe haber una sola instancia.
+services:
+  - type: web
+    name: nightfall
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node server.js
+    healthCheckPath: /
