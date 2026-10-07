@@ -143,6 +143,17 @@ docker build -t nightfall .
 docker run -p 7860:7860 nightfall
 ```
 
+### En una Raspberry Pi con Tailscale Funnel
+
+Gratis, con dirección `https` fija (`https://equipo.tu-red.ts.net`) y sin abrir puertos del router. Requiere Tailscale en la Pi y Funnel activado en tu red (*Access controls* y *DNS → HTTPS Certificates* en el panel de Tailscale).
+
+```bash
+docker compose up -d --build
+tailscale funnel --bg 7860
+```
+
+El juego sólo escucha en `127.0.0.1:7860` de la Pi y Funnel lo publica. `tailscale funnel status` muestra la dirección.
+
 ### En una Raspberry Pi con Cloudflare Tunnel
 
 Sin coste mensual y sin abrir puertos del router: el juego corre en tu Raspberry Pi y Cloudflare lo publica en tu dominio con `https` (los WebSockets funcionan sin configurar nada).
@@ -154,7 +165,7 @@ Sin coste mensual y sin abrir puertos del router: el juego corre en tu Raspberry
 ```bash
 git clone <este repositorio> && cd <carpeta>
 echo "TUNNEL_TOKEN=pega_aquí_el_token" > .env
-docker compose up -d --build
+docker compose --profile cloudflare up -d --build
 ```
 
 Las imágenes de Node y de `cloudflared` son multiarquitectura, así que sirven en una Pi de 64 bits. El dominio tiene que estar gestionado por Cloudflare.

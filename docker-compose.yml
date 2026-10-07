@@ -1,15 +1,25 @@
-# NIGHTFALL en una Raspberry Pi (u otro equipo en casa), publicado con Cloudflare Tunnel.
-# Uso: crea un archivo .env con TUNNEL_TOKEN=... y ejecuta `docker compose up -d --build`.
+# NIGHTFALL en una Raspberry Pi (u otro equipo en casa).
+#
+# Con Tailscale Funnel (u otro proxy en el propio equipo):
+#   docker compose up -d --build
+#   tailscale funnel --bg 7860
+# El juego sólo es accesible desde el propio equipo (127.0.0.1:7860); Funnel lo publica.
+#
+# Con Cloudflare Tunnel: crea un .env con TUNNEL_TOKEN=... y ejecuta
+#   docker compose --profile cloudflare up -d --build
 services:
   nightfall:
     build: .
+    ports:
+      - "127.0.0.1:7860:7860"
     restart: unless-stopped
 
   cloudflared:
+    profiles: ["cloudflare"]
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run
     environment:
-      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?Falta TUNNEL_TOKEN en el archivo .env}
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
     depends_on:
       - nightfall
     restart: unless-stopped
