@@ -1,5 +1,5 @@
 # Imagen del servidor de NIGHTFALL: sirve el juego y lleva las salas en línea.
-# Vale para cualquier alojamiento de contenedores (Back4app Containers, entre otros).
+# Vale para cualquier alojamiento de contenedores (Hugging Face Spaces, Back4app Containers, entre otros).
 FROM node:22-alpine
 
 WORKDIR /app
@@ -13,8 +13,8 @@ COPY css ./css
 COPY src ./src
 
 # Con PORT definido, el servidor acepta conexiones de fuera.
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=7860
+EXPOSE 7860
 
 USER node
 CMD ["node", "server.js"]

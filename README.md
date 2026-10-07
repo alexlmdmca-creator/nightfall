@@ -1,3 +1,13 @@
+---
+title: NIGHTFALL
+emoji: 🎯
+colorFrom: gray
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # NIGHTFALL
 
 **Shooter en primera persona para el navegador**, con una misión en solitario y partidas en línea por equipos. No hay nada que instalar para jugar: se abre una dirección web y listo.
