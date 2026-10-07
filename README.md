@@ -133,15 +133,31 @@ El juego necesita un alojamiento que **ejecute Node y admita WebSockets**; un al
 
 El repositorio viene preparado de dos formas:
 
-- **`Dockerfile`**, para cualquier alojamiento de contenedores, como [Back4app Containers](https://www.back4app.com/container-as-a-service-caas): se conecta el repositorio y el servicio construye y arranca la imagen. El servidor escucha en el puerto 8080 y gasta muy poca memoria (unos 16 MB en reposo).
+- **`Dockerfile`**, para cualquier alojamiento de contenedores, como [Back4app Containers](https://www.back4app.com/container-as-a-service-caas): se conecta el repositorio y el servicio construye y arranca la imagen. El servidor escucha en el puerto 7860 y gasta muy poca memoria (unos 16 MB en reposo).
 - **`render.yaml`**, para [Render](https://render.com), creando un *Blueprint* a partir del repositorio.
 
 En ambos casos el servidor acepta conexiones de fuera automáticamente y el alojamiento da una dirección `https`.
 
 ```bash
 docker build -t nightfall .
-docker run -p 8080:8080 nightfall
+docker run -p 7860:7860 nightfall
 ```
+
+### En una Raspberry Pi con Cloudflare Tunnel
+
+Sin coste mensual y sin abrir puertos del router: el juego corre en tu Raspberry Pi y Cloudflare lo publica en tu dominio con `https` (los WebSockets funcionan sin configurar nada).
+
+1. En [Cloudflare Zero Trust](https://one.dash.cloudflare.com) crea un túnel (*Networks → Tunnels → Create*), tipo *Cloudflared*, y copia su token.
+2. En el túnel añade un *Public Hostname*, por ejemplo `nightfall.tudominio.com`, con servicio `HTTP` y URL `nightfall:7860`.
+3. En la Raspberry Pi (con Docker y Docker Compose instalados):
+
+```bash
+git clone <este repositorio> && cd <carpeta>
+echo "TUNNEL_TOKEN=pega_aquí_el_token" > .env
+docker compose up -d --build
+```
+
+Las imágenes de Node y de `cloudflared` son multiarquitectura, así que sirven en una Pi de 64 bits. El dominio tiene que estar gestionado por Cloudflare.
 
 A tener en cuenta:
 
